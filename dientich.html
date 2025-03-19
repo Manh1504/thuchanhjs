@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hình chữ nhật</title>
+    <script>
+        function tinhDienTichHinhChuNhat() {
+            let chieuDai = prompt("Nhập chiều dài của hình chữ nhật:");
+            let chieuRong = prompt("Nhập chiều rộng của hình chữ nhật:");
+
+            chieuDai = parseFloat(chieuDai);
+            chieuRong = parseFloat(chieuRong);
+
+            if (isNaN(chieuDai) || isNaN(chieuRong) || chieuDai <= 0 || chieuRong <= 0) {
+                alert("Vui lòng nhập số hợp lệ và lớn hơn 0!");
+                return;
+            }
+
+            let dienTich = chieuDai * chieuRong;
+            alert(`Diện tích hình chữ nhật là: ${dienTich}`);
+        }
+
+        tinhDienTichHinhChuNhat();
+    </script>
+</head>
+<body>
+</body>
+</html>
