@@ -1,28 +1,268 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hình chữ nhật</title>
-    <script>
-        function tinhDienTichHinhChuNhat() {
-            let chieuDai = prompt("Nhập chiều dài của hình chữ nhật:");
-            let chieuRong = prompt("Nhập chiều rộng của hình chữ nhật:");
+OOP
+public class FirstProgram {
+public static void main(String[] args) {
+Circle circle = new Circle(25.5f);
+Rectangle rectangle = new Rectangle(5, 12);
 
-            chieuDai = parseFloat(chieuDai);
-            chieuRong = parseFloat(chieuRong);
+circle.showInfo();
+rectangle.showInfo();
+}
+}
 
-            if (isNaN(chieuDai) || isNaN(chieuRong) || chieuDai <= 0 || chieuRong <= 0) {
-                alert("Vui lòng nhập số hợp lệ và lớn hơn 0!");
-                return;
-            }
+interface IShape {
+float PI = 3.1416f;
+void showInfo();
+float getArea();
+float getPerimeter();
+}
 
-            let dienTich = chieuDai * chieuRong;
-            alert(`Diện tích hình chữ nhật là: ${dienTich}`);
-        }
+class Circle implements IShape {
+private float radius;
 
-        tinhDienTichHinhChuNhat();
-    </script>
-</head>
-<body>
-</body>
-</html>
+public Circle(float radius) {
+this.radius = radius;
+}
+
+public float getRadius() {
+return radius;
+}
+
+public void setRadius(float radius) {
+this.radius = radius;
+}
+
+@Override
+public float getArea() {
+return PI * radius * radius;
+}
+
+@Override
+public float getPerimeter() {
+return 2 * PI * radius;
+}
+
+@Override
+public void showInfo() {
+System.out.println("Circle with radius " + radius + " has area: " + getArea() + " and perimeter: " + getPerimeter());
+}
+}
+
+class Rectangle implements IShape {
+public double width;
+public double length;
+
+public Rectangle(double width, double length) {
+this.width = width;
+this.length = length;
+}
+
+@Override
+public float getArea() {
+return (float) (width * length);
+}
+
+@Override
+public float getPerimeter() {
+return (float) (2 * (width + length));
+}
+
+@Override
+public void showInfo() {
+System.out.println("Rectangle with width " + width + " and length " + length + " has area: " + getArea() + " and perimeter: " + getPerimeter());
+}
+}
+
+List
+import java.util.LinkedList;
+import java.util.List;
+
+public class Main {
+public static void main(String[] args) {
+List<Integer> arr = new LinkedList<>();
+    //thêm 8 phần tử random <10
+    for (int i = 0; i < 8; i++) {
+    int a = (int) (Math.random() * 100);
+    arr.add(a);
+    }
+    arr.add(1, 25);//thêm 25 vào vị trí thứ 2
+    arr.forEach(n -> System.out.print(n + " "));
+    System.out.println();
+
+    arr.removeIf(n -> n <30);//xóa ptu <30
+    arr.forEach(n -> System.out.print(n + " "));
+    System.out.println();
+
+    for (int i = 0; i < arr.size(); i++) { //in ra vị trí các pt 40-80
+    int a = arr.get(i);
+    if (a > 40 && a<80) {
+    System.out.print(i + (" "));
+    }
+    }
+    }
+    }
+    map
+    import java.util.Map;
+    public class nhan {
+    public static void main(String[] args){
+    Map<String, String> friendPhones = Map.of(
+    "Bob", "+1-202-555-0118",
+    "James", "+1-202-555-0220",
+    "Katy", "+1-202-555-0175"
+    );
+    // printing names
+    for (String name : friendPhones.keySet()) {
+    System.out.println(name);
+    }
+    // printing phones
+    for (String phone : friendPhones.values()) {
+    System.out.println(phone);
+    }
+    friendPhones.forEach((ten, sdt) -> System.out.println(ten + ": " + sdt));
+    }
+    }
+
+    data
+    import java.io.*;
+    import java.util.Scanner;
+
+    public class Cau2 {
+    public static void main(String[] args) throws IOException {
+    DataOutputStream dos = new DataOutputStream(new FileOutputStream("Int.txt"));
+    int sum = 0;
+    int a[] = {1,2,3,4};
+    for (int i = 0; i < a.length; i++) {
+    dos.writeInt(a[i]);
+    }
+    dos.close();
+
+    FileInputStream fis = new FileInputStream("Int.txt");
+    DataInputStream dis = new DataInputStream(fis);
+    for (int i = 0; i < 2; i++) {
+    sum += dis.readInt();
+    }
+    System.out.println(sum);
+
+    dis.close();
+
+    }
+    }
+
+    thread
+    import java.time.LocalTime;
+
+    public class MultiThreadExample {
+    public static void main(String[] args) {
+    // Luồng 1: In thời gian hiện tại mỗi giây
+    Thread timeThread = new Thread(() -> {
+    while (true) {
+    LocalTime now = LocalTime.now();
+    System.out.println("Thời gian hiện tại: " + now);
+    try {
+    Thread.sleep(1000); // Dừng 1 giây
+    } catch (InterruptedException e) {
+    e.printStackTrace();
+    }
+    }
+    });
+
+    // Luồng 2: Đợi 2 giây, rồi bắt đầu tính tổng
+    Thread sumThread = new Thread(() -> {
+    try {
+    Thread.sleep(2000); // Đợi 2 giây sau khi luồng 1 chạy
+    } catch (InterruptedException e) {
+    e.printStackTrace();
+    }
+
+    int[] numbers = {1, 2, 3, 4, 5}; // Mảng mẫu
+    int sum = 0;
+    for (int num : numbers) {
+    sum += num;
+    }
+
+    System.out.println("Tổng các phần tử: " + sum);
+    });
+
+    // Bắt đầu cả hai luồng
+    timeThread.start();
+    sumThread.start();
+    }
+    }
+
+    Runnable
+    import java.time.LocalTime;
+
+    public class RunnableExample {
+    public static void main(String[] args) {
+    // Runnable cho luồng 1: In thời gian hiện tại mỗi giây
+    Runnable timeRunnable = () -> {
+    while (true) {
+    LocalTime now = LocalTime.now();
+    System.out.println("Thời gian hiện tại: " + now);
+    try {
+    Thread.sleep(1000); // Dừng 1 giây
+    } catch (InterruptedException e) {
+    e.printStackTrace();
+    }
+    }
+    };
+
+    // Runnable cho luồng 2: Đợi 2 giây rồi tính tổng mảng
+    Runnable sumRunnable = () -> {
+    try {
+    Thread.sleep(2000); // Chờ 2 giây trước khi chạy
+    } catch (InterruptedException e) {
+    e.printStackTrace();
+    }
+
+    int[] numbers = {1, 2, 3, 4, 5};
+    int sum = 0;
+    for (int num : numbers) {
+    sum += num;
+    }
+    System.out.println("Tổng các phần tử: " + sum);
+    };
+
+    // Tạo và chạy luồng từ Runnable
+    Thread timeThread = new Thread(timeRunnable);
+    Thread sumThread = new Thread(sumRunnable);
+
+    timeThread.start();
+    sumThread.start();
+    // Bắt đầu luồng 1(có join)
+    timeThread.start();
+
+    try {
+    // Chờ luồng 1 chạy xong (3 giây) rồi mới chạy luồng 2
+    timeThread.join();
+    } catch (InterruptedException e) {
+    e.printStackTrace();
+    }
+
+    // Bắt đầu luồng 2 sau khi luồng 1 kết thúc
+    sumThread.start();
+    }
+    }
+
+    Stream
+    import java.util.Arrays;
+    import java.util.List;
+    import java.util.stream.Collectors;
+    public class SortNumbersWithLambda {
+    public static void main(String[] args) {
+    List<Integer> numbers = Arrays.asList(5, 2, 9, 1, 7, 3);
+
+        // Sắp xếp tăng dần (Ascending)
+        List<Integer> sortedAsc = numbers.stream()
+            .sorted((a, b) -> a - b)
+            .collect(Collectors.toList());
+            System.out.println("Tăng dần: " + sortedAsc);
+
+            // Sắp xếp giảm dần (Descending)
+            List<Integer> sortedDesc = numbers.stream()
+                .sorted((a, b) -> b - a)
+                .collect(Collectors.toList());
+                System.out.println("Giảm dần: " + sortedDesc);
+                }
+                }
+
+
